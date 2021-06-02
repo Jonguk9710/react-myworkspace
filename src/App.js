@@ -191,3 +191,5 @@ function App() {
 }
 
 export default App; // export: 내보내기, import: 가져오기
+
+//App.js에 코멘트 추가
