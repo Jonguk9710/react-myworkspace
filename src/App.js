@@ -32,7 +32,10 @@ import {
 
 import Home from "./components/home/Home";
 
-const Todo = lazy(() => import("./components/todo-render-scope/Todo"));
+const Todo = lazy(() => import("./components/todo-router-param/Todo"));
+const TodoDetail = lazy(() =>
+  import("./components/todo-router-param/TodoDetail")
+);
 const Contact = lazy(() =>
   import("./components/contact-render-scope/ContactMaterial")
 );
@@ -179,7 +182,8 @@ function App() {
             <Suspense fallback={<div>Loading...</div>}>
               <Switch>
                 <Route path="/" component={Home} exact></Route>
-                <Route path="/todo" component={Todo}></Route>
+                <Route path="/todo" component={Todo} exact></Route>
+                <Route path="/todo:id" component={TodoDetail}></Route>
                 <Route path="/contacts" component={Contact}></Route>
               </Switch>
             </Suspense>

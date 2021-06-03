@@ -1,9 +1,6 @@
-import TodoList from "../todo-render-scope/TodoList";
-
 import {
   BarChart,
   Bar,
-  Cell,
   XAxis,
   YAxis,
   CartesianGrid,
