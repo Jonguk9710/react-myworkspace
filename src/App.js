@@ -40,9 +40,7 @@ const store = createStore(rootReducer);
 
 const Todo = lazy(() => import("./components/todo-redux/Todo"));
 const TodoDetail = lazy(() => import("./components/todo-redux/TodoDetail"));
-const Contact = lazy(() =>
-  import("./components/contact-render-scope/ContactMaterial")
-);
+const Contact = lazy(() => import("./components/contact-redux/Contact"));
 
 const drawerWidth = "240px";
 
