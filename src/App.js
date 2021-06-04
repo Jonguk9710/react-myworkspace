@@ -41,6 +41,9 @@ const store = createStore(rootReducer);
 const Todo = lazy(() => import("./components/todo-redux/Todo"));
 const TodoDetail = lazy(() => import("./components/todo-redux/TodoDetail"));
 const Contact = lazy(() => import("./components/contact-redux/Contact"));
+const ContactDetail = lazy(() =>
+  import("./components/contact-redux/ContactDetail")
+);
 
 const drawerWidth = "240px";
 
@@ -188,6 +191,7 @@ function App() {
                   <Route path="/todo" component={Todo} exact></Route>
                   <Route path="/todo/:id" component={TodoDetail}></Route>
                   <Route path="/contacts" component={Contact} exact></Route>
+                  <Route path="/contacts/:id" component={ContactDetail}></Route>
                 </Switch>
               </Suspense>
             </main>

@@ -45,7 +45,7 @@ const ContactItem = ({ contact }) => {
           <span
             style={{ cursor: "pointer" }}
             onClick={() => {
-              history.push(`/contact/${contact.id}`);
+              history.push(`/contacts/${contact.id}`);
             }}
           >
             {contact.fname}

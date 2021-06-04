@@ -50,7 +50,7 @@ const ContactDetail = () => {
                 variant="outlined"
                 color="primary"
                 onClick={() => {
-                  history.push("/contact");
+                  history.push("/contacts");
                 }}
               >
                 목록
