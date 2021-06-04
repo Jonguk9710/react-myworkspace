@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
 import DeleteIcon from "@material-ui/icons/Delete";
 
@@ -14,6 +15,8 @@ const ContactItem = ({ contact }) => {
   const inputTel = useRef();
   const inputName = useRef();
   const inputEmail = useRef();
+
+  const history = useHistory();
 
   const remove = (id) => {
     dispatch({ type: "REMOVE_CONTACT", payload: id });
@@ -38,7 +41,16 @@ const ContactItem = ({ contact }) => {
         </Button>
       </TableCell>
       <TableCell>
-        {!isEdit && <span>{contact.fname}</span>}
+        {!isEdit && (
+          <span
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              history.push(`/contact/${contact.id}`);
+            }}
+          >
+            {contact.fname}
+          </span>
+        )}
         {isEdit && (
           <TextField
             type="text"
