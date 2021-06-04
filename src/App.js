@@ -7,6 +7,8 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 import { green, purple } from "@material-ui/core/colors";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 
 // Core Components
 import AppBar from "@material-ui/core/AppBar";
@@ -32,10 +34,12 @@ import {
 
 import Home from "./components/home/Home";
 
-const Todo = lazy(() => import("./components/todo-router-param/Todo"));
-const TodoDetail = lazy(() =>
-  import("./components/todo-router-param/TodoDetail")
-);
+import rootReducer from "./redux";
+
+const store = createStore(rootReducer);
+
+const Todo = lazy(() => import("./components/todo-redux/Todo"));
+const TodoDetail = lazy(() => import("./components/todo-redux/TodoDetail"));
 const Contact = lazy(() =>
   import("./components/contact-render-scope/ContactMaterial")
 );
@@ -130,67 +134,69 @@ function App() {
   );
 
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <div className={classes.root}>
-          <header>
-            <AppBar position="fixed" className={classes.appBar}>
-              <Toolbar>
-                {/* color="inherit" 부모 요소의 폰트 컬러를 사용함 */}
-                <IconButton
-                  color="inherit"
-                  edge="start"
-                  className={classes.menuButton}
-                  onClick={handleDrawerToggle}
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <div className={classes.root}>
+            <header>
+              <AppBar position="fixed" className={classes.appBar}>
+                <Toolbar>
+                  {/* color="inherit" 부모 요소의 폰트 컬러를 사용함 */}
+                  <IconButton
+                    color="inherit"
+                    edge="start"
+                    className={classes.menuButton}
+                    onClick={handleDrawerToggle}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                  <Typography variant="h6" noWrap>
+                    MY WORKSPACE
+                  </Typography>
+                </Toolbar>
+              </AppBar>
+
+              {/* 앱서랍(Drawer)  */}
+
+              {/* 화면이 1280px 이상일 때 숨기는 서랍 */}
+              <Hidden lgUp implementation="css">
+                <Drawer
+                  variant="temporary"
+                  open={mobileOpen}
+                  classes={{ paper: classes.drawerPaper }}
+                  onClose={handleDrawerToggle}
                 >
-                  <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" noWrap>
-                  MY WORKSPACE
-                </Typography>
-              </Toolbar>
-            </AppBar>
+                  {drawer}
+                </Drawer>
+              </Hidden>
 
-            {/* 앱서랍(Drawer)  */}
-
-            {/* 화면이 1280px 이상일 때 숨기는 서랍 */}
-            <Hidden lgUp implementation="css">
-              <Drawer
-                variant="temporary"
-                open={mobileOpen}
-                classes={{ paper: classes.drawerPaper }}
-                onClose={handleDrawerToggle}
-              >
-                {drawer}
-              </Drawer>
-            </Hidden>
-
-            {/* 화면이 1280px 미만일 때 숨기는 서랍 */}
-            <Hidden mdDown implementation="css">
-              <Drawer
-                open
-                variant="permanent"
-                classes={{ paper: classes.drawerPaper }}
-              >
-                {drawer}
-              </Drawer>
-            </Hidden>
-          </header>
-          <main className={classes.content}>
-            {/* 상단 toolbar 공간만큼 띄우기 */}
-            <div className={classes.toolbar} />
-            <Suspense fallback={<div>Loading...</div>}>
-              <Switch>
-                <Route path="/" component={Home} exact></Route>
-                <Route path="/todo" component={Todo} exact></Route>
-                <Route path="/todo:id" component={TodoDetail}></Route>
-                <Route path="/contacts" component={Contact}></Route>
-              </Switch>
-            </Suspense>
-          </main>
-        </div>
-      </Router>
-    </ThemeProvider>
+              {/* 화면이 1280px 미만일 때 숨기는 서랍 */}
+              <Hidden mdDown implementation="css">
+                <Drawer
+                  open
+                  variant="permanent"
+                  classes={{ paper: classes.drawerPaper }}
+                >
+                  {drawer}
+                </Drawer>
+              </Hidden>
+            </header>
+            <main className={classes.content}>
+              {/* 상단 toolbar 공간만큼 띄우기 */}
+              <div className={classes.toolbar} />
+              <Suspense fallback={<div>Loading...</div>}>
+                <Switch>
+                  <Route path="/" component={Home} exact></Route>
+                  <Route path="/todo" component={Todo} exact></Route>
+                  <Route path="/todo/:id" component={TodoDetail}></Route>
+                  <Route path="/contacts" component={Contact} exact></Route>
+                </Switch>
+              </Suspense>
+            </main>
+          </div>
+        </Router>
+      </ThemeProvider>
+    </Provider>
   );
 }
 

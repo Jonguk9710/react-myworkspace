@@ -5,21 +5,33 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
 import { Check } from "@material-ui/icons";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
 
-const TodoItem = ({ index, todo, onRemove, onSave }) => {
+const TodoItem = ({ todo }) => {
   const [isEdit, setIsEdit] = useState(todo.isEdit);
   const history = useHistory(); // 코드를 이용하여 경로 이동 제어를 할 수 있음
+  const dispatch = useDispatch();
+  const inputRef = useRef();
+
+  const remove = (id) => {
+    dispatch({ type: "REMOVE_TODO", payload: id });
+  };
+
+  const save = (id) => {
+    const memo = inputRef.current.value;
+    dispatch({ type: "SAVE_TODO", payload: { id, memo } });
+  };
 
   return (
     <ListItem>
       <ListItemIcon
         onClick={() => {
-          onRemove(index);
+          remove(todo.id);
         }}
       >
-        <Check />
+        <Check style={{ cursor: "pointer" }} />
       </ListItemIcon>
       {!isEdit && (
         <ListItemText
@@ -44,6 +56,7 @@ const TodoItem = ({ index, todo, onRemove, onSave }) => {
         <ListItemText>
           <TextField
             type="text"
+            inputRef={inputRef}
             defaultValue={todo.memo}
             style={{ width: "100%" }}
           ></TextField>
@@ -52,7 +65,7 @@ const TodoItem = ({ index, todo, onRemove, onSave }) => {
       {isEdit && (
         <Button
           onClick={() => {
-            onSave(index);
+            save(todo.id);
             setIsEdit(false);
           }}
         >
