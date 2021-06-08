@@ -23,11 +23,11 @@ const ContactItem = ({ contact }) => {
   };
 
   const save = (id) => {
-    const fname = inputName.current.value;
-    const tel = inputTel.current.value;
+    const name = inputName.current.value;
+    const phone = inputTel.current.value;
     const email = inputEmail.current.value;
 
-    dispatch({ type: "SAVE_CONTACT", payload: { id, fname, tel, email } });
+    dispatch({ type: "MODIFY_CONTACT", payload: { id, name, phone, email } });
   };
   return (
     <TableRow>
@@ -48,24 +48,24 @@ const ContactItem = ({ contact }) => {
               history.push(`/contacts/${contact.id}`);
             }}
           >
-            {contact.fname}
+            {contact.name}
           </span>
         )}
         {isEdit && (
           <TextField
             type="text"
-            defaultValue={contact.fname}
+            defaultValue={contact.name}
             inputRef={inputName}
           ></TextField>
         )}
       </TableCell>
 
       <TableCell>
-        {!isEdit && <span>{contact.tel}</span>}
+        {!isEdit && <span>{contact.phone}</span>}
         {isEdit && (
           <TextField
             type="text"
-            defaultValue={contact.tel}
+            defaultValue={contact.phone}
             inputRef={inputTel}
           ></TextField>
         )}

@@ -10,13 +10,12 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   const add = () => {
-    const id = new Date().getTime();
-    const tel = inputTel.current.value;
-    const fname = inputName.current.value;
+    const name = inputName.current.value;
+    const phone = inputTel.current.value;
     const email = inputEmail.current.value;
-    dispatch({ type: "ADD_CONTACT", payload: { id, fname, tel, email } });
-    inputTel.current.value = "";
+    dispatch({ type: "ADD_CONTACT", payload: { name, phone, email } });
     inputName.current.value = "";
+    inputTel.current.value = "";
     inputEmail.current.value = "";
   };
   const change = (event) => {
