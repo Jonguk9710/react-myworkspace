@@ -8,9 +8,8 @@ const TodoForm = () => {
   const dispatch = useDispatch();
 
   const add = () => {
-    const id = new Date().getTime();
     const memo = inputRef.current.value;
-    dispatch({ type: "ADD_TODO", payload: { id, memo } });
+    dispatch({ type: "ADD_TODO", payload: { memo } });
     inputRef.current.value = "";
   };
   const change = (event) => {

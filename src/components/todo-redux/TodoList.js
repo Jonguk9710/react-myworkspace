@@ -1,9 +1,15 @@
 import List from "@material-ui/core/List";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
 
 const TodoList = () => {
   const todoList = useSelector((state) => state.todo);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_TODOLIST" });
+  }, [dispatch]);
 
   return (
     <div>

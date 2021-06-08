@@ -7,8 +7,6 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 import { green, purple } from "@material-ui/core/colors";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
 
 // Core Components
 import AppBar from "@material-ui/core/AppBar";
@@ -34,9 +32,17 @@ import {
 
 import Home from "./components/home/Home";
 
-import rootReducer from "./redux";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import createSagaMiddleware from "redux-saga";
 
-const store = createStore(rootReducer);
+import rootReducer from "./redux/reducers";
+import rootSaga from "./redux/sagas";
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(rootSaga);
 
 const Todo = lazy(() => import("./components/todo-redux/Todo"));
 const TodoDetail = lazy(() => import("./components/todo-redux/TodoDetail"));
