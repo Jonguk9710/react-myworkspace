@@ -22,7 +22,11 @@ const TodoList = () => {
           <TodoItem key={todo.id} todo={todo} />
         ))}
       </List>
-      <TodoPagination />
+      <TodoPagination
+        totalElements={data.totalElements}
+        page={data.page}
+        size={data.size}
+      />
     </div>
   );
 };
