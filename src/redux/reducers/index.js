@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import todo from "./todo";
+import todo from "./todo-paging";
 import contact from "./contact";
 
 const rootReducer = combineReducers({

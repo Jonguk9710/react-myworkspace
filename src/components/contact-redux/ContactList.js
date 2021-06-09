@@ -30,7 +30,7 @@ const ContactList = () => {
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody style={{ height: "40vh", overflowY: "auto" }}>
             {contactList.map((contact) => (
               <ContactItem key={contact.id} contact={contact}></ContactItem>
             ))}

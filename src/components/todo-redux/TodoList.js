@@ -3,21 +3,26 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
 
+import TodoPagination from "./TodoPagination";
+
 const TodoList = () => {
-  const todoList = useSelector((state) => state.todo);
+  const data = useSelector((state) => state.todo);
+  console.log("-- todo state in TodoList Component --");
+  console.log(data);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: "FETCH_TODOLIST" });
+    dispatch({ type: "FETCH_TODOLIST_PAGING" });
   }, [dispatch]);
 
   return (
     <div>
       <List style={{ height: "40vh", overflowY: "auto" }}>
-        {todoList.map((todo) => (
+        {data.content.map((todo) => (
           <TodoItem key={todo.id} todo={todo} />
         ))}
       </List>
+      <TodoPagination />
     </div>
   );
 };
