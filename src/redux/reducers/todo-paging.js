@@ -9,9 +9,11 @@ const todo = (state = initialState, action) => {
   switch (action.type) {
     case "MODIFY_TODO_SUCCEEDED": {
       const newState = { ...state };
+
       newState.content = state.content.map((todo) =>
         todo.id === action.payload.id ? { ...action.payload } : todo
       );
+
       return newState;
     }
 
