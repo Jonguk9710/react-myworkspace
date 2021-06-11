@@ -27,6 +27,13 @@ const TodoList = () => {
     inputSearch.current.value = "";
   };
 
+  const change = (event) => {
+    // console.log(event);
+    if (event.charCode === 13) {
+      search();
+    }
+  };
+
   return (
     <div>
       <List style={{ height: "40vh", overflowY: "auto" }}>
@@ -38,6 +45,7 @@ const TodoList = () => {
         variant="outlined"
         inputRef={inputSearch}
         label="조회"
+        onKeyPress={change}
         size="small"
         style={{
           width: "30%",
