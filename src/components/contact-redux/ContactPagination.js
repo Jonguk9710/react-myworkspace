@@ -1,8 +1,7 @@
 import TablePagination from "@material-ui/core/TablePagination";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-const ContactPagination = () => {
-  const { totalElements, page, size } = useSelector((state) => state.contact);
+const ContactPagination = ({ totalElements, page, size }) => {
   const dispatch = useDispatch();
 
   const handleChangePage = (event, newPage) => {

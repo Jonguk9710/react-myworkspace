@@ -2,7 +2,9 @@ import TablePagination from "@material-ui/core/TablePagination";
 import { useDispatch, useSelector } from "react-redux";
 
 const TodoPagination = () => {
-  const { totalElements, page, size } = useSelector((state) => state.todo);
+  const { totalElements, page, size, keyword } = useSelector(
+    (state) => state.todo
+  );
   const dispatch = useDispatch();
 
   const handleChangePage = (event, newPage) => {
@@ -29,6 +31,7 @@ const TodoPagination = () => {
       onChangePage={handleChangePage}
       rowsPerPage={size}
       onChangeRowsPerPage={handleChangeRowsPerPage}
+      keyword={keyword}
     />
   );
 };

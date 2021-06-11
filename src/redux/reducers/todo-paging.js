@@ -25,6 +25,14 @@ const todo = (state = initialState, action) => {
         totalElements: action.payload.totalElements,
       };
 
+    case "SEARCH_TODOLIST_SUCCEEDED":
+      return {
+        content: action.payload.content,
+        page: action.payload.number,
+        size: action.payload.size,
+        keyword: action.payload.keyword,
+        totalElements: action.payload.totalElements,
+      };
     default:
       return state;
   }

@@ -13,6 +13,10 @@ const todoApi = {
   remove: (id) => axios.delete(`${process.env.REACT_APP_API_BASE}/todos/${id}`),
   modify: (data) =>
     axios.put(`${process.env.REACT_APP_API_BASE}/todos/${data.id}`, data),
+  search: (page, size, keyword) =>
+    axios.get(
+      `${process.env.REACT_APP_API_BASE}/todos/search?page=${page}&size=${size}&keyword=${keyword}`
+    ),
 };
 
 export default todoApi;

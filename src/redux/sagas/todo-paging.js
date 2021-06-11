@@ -83,11 +83,35 @@ function* modifyTodo(action) {
   }
 }
 
+function* searchTodo(action) {
+  console.log("--sagas: search Todo --");
+  console.log(action);
+
+  try {
+    const { page, size, keyword } = yield select((state) => state.todo);
+
+    const result = yield call(
+      api.search,
+      action.payload ? action.payload.page : page,
+      action.payload ? action.payload.size : size,
+      action.payload ? action.payload.keyword : keyword
+    );
+    console.log(result);
+    yield put({
+      type: "SEARCH_TODOLIST_SUCCEEDED",
+      payload: result.data,
+    });
+  } catch (e) {
+    alert(e.message);
+  }
+}
+
 function* todoSaga() {
   yield takeEvery("ADD_TODO", addTodo);
   yield takeEvery("REMOVE_TODO", removeTodo);
   yield takeEvery("MODIFY_TODO", modifyTodo);
   yield takeLatest("FETCH_TODOLIST_PAGING", fetchTodoListPaging);
+  yield takeEvery("SEARCH_TODOLIST", searchTodo);
 }
 
 export default todoSaga;
