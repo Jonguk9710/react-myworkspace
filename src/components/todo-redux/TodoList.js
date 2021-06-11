@@ -41,6 +41,12 @@ const TodoList = () => {
           <TodoItem key={todo.id} todo={todo} />
         ))}
       </List>
+      <TodoPagination
+        totalElements={data.totalElements}
+        page={data.page}
+        size={data.size}
+        keyword={data.keyword}
+      />
       <TextField
         variant="outlined"
         inputRef={inputSearch}
@@ -60,12 +66,6 @@ const TodoList = () => {
       >
         입력
       </Button>
-      <TodoPagination
-        totalElements={data.totalElements}
-        page={data.page}
-        size={data.size}
-        keyword={data.keyword}
-      />
     </div>
   );
 };
