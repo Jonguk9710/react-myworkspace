@@ -35,6 +35,7 @@ const TodoDetail = () => {
   const todo = useSelector(
     (state) => state.todo.filter((todo) => todo.id === parseInt(id))[0]
   );
+  // console.log(todo);
 
   return (
     <>
@@ -55,6 +56,9 @@ const TodoDetail = () => {
                 onClick={() => {
                   history.push("/todo");
                 }}
+                // onClick={() => {
+                //   history.replace("/todo");
+                // }}
                 // onClick={() => {
                 //   history.goBack(-1);
                 // }}

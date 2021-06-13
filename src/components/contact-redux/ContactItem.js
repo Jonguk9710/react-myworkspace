@@ -81,7 +81,7 @@ const ContactItem = ({ contact }) => {
           ></TextField>
         )}
       </TableCell>
-      <TableCell>
+      <TableCell style={{ display: "flex" }}>
         {!isEdit && (
           <Button
             onClick={() => {

@@ -21,8 +21,8 @@ const ContactList = () => {
 
   return (
     <div>
-      <TableContainer>
-        <Table>
+      <TableContainer style={{ height: "45vh", overflowY: "scroll" }}>
+        <Table stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
@@ -32,7 +32,7 @@ const ContactList = () => {
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
-          <TableBody style={{ height: "2rem", overflowY: "auto" }}>
+          <TableBody>
             {data.content.map((contact) => (
               <ContactItem key={contact.id} contact={contact}></ContactItem>
             ))}
