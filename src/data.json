@@ -1,0 +1,34 @@
+{
+  "response": {
+    "body": {
+      "totalCount": 25,
+      "items": [
+        {
+          "daegu": "12",
+          "chungnam": "24",
+          "incheon": "16",
+          "daejeon": "22",
+          "gyeongbuk": "12",
+          "sejong": "24",
+          "gwangju": "14",
+          "jeonbuk": "42",
+          "gangwon": "8",
+          "ulsan": "8",
+          "jeonnam": "15",
+          "seoul": "26",
+          "busan": "6",
+          "jeju": "19",
+          "chungbuk": "27",
+          "gyeongnam": "13",
+          "dataTime": "2021-06-15 01:00",
+          "dataGubun": "1",
+          "gyeonggi": "27",
+          "itemCode": "PM2.5"
+        }
+      ],
+      "pageNo": 1,
+      "numOfRows": 1
+    },
+    "header": { "resultMsg": "NORMAL_CODE", "resultCode": "00" }
+  }
+}

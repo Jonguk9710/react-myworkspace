@@ -24,6 +24,7 @@ const ContactForm = () => {
       add();
     }
   };
+  
 
   return (
     <div style={{ display: "flex" }}>
