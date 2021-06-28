@@ -11,7 +11,7 @@ import {
 
 const LineChartSample = ({ data }) => {
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="80%">
       <LineChart
         width={500}
         height={300}

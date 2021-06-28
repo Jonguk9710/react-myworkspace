@@ -4,9 +4,8 @@ import Paper from "@material-ui/core/Paper";
 import Hidden from "@material-ui/core/Hidden";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-
 import BarChartSample from "./BarChartSample";
-import LineChartSample from "./LineChartSample";
+
 import { useEffect, useState } from "react";
 import api from "../../api/opendata";
 import Covid from "../covid19/Covid";
@@ -27,24 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const transformLocationData = (source, sido) => {
-  if (source.length === 0) return [];
-
-  const transData = [];
-  let item = {};
-  source.map((covid) => {
-    if (covid.gubun === sido) {
-      item.stdDay = covid.stdDay.substr(7, 6);
-      item.incDec = parseInt(covid.incDec);
-      item.deathCnt = parseInt(covid.deathCnt);
-      transData.unshift(item);
-      item = {};
-    }
-    return transData;
-  });
-  return transData;
-};
-const Home = () => {
+const CovidRisk = () => {
   const classes = useStyles();
   const [sido, setSido] = useState("");
   const [source, setSource] = useState([]);
@@ -78,11 +60,7 @@ const Home = () => {
         </Paper>
       </Grid>
       <Grid item xs={12} sm={5} lg={4}>
-        <Paper className={classes.paper} style={{ height: "30vh" }}>
-          <h3>시도별 코로나19 현황</h3>
-          <BarChartSample data={sourceData} />
-        </Paper>
-        <Paper className={classes.paper} style={{ height: "30vh" }}>
+        <Paper className={classes.paper} style={{ height: "50vh" }}>
           <h3>
             <Select
               value={sido}
@@ -98,10 +76,10 @@ const Home = () => {
             </Select>
             {"\u00A0"} 코로나19 현황
           </h3>
-          <LineChartSample data={transformLocationData(source, sido)} />
+          <BarChartSample data={sourceData} />
         </Paper>
       </Grid>
     </Grid>
   );
 };
-export default Home;
+export default CovidRisk;

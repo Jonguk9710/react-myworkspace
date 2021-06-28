@@ -31,6 +31,7 @@ import {
 } from "@material-ui/icons";
 
 import Home from "./components/home/Home";
+import CovidRisk from "./components/covid/CovidRisk";
 
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
@@ -44,8 +45,6 @@ const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootSaga);
 
-const Todo = lazy(() => import("./components/todo-redux/Todo"));
-const TodoDetail = lazy(() => import("./components/todo-redux/TodoDetail"));
 const Contact = lazy(() => import("./components/contact-redux/Contact"));
 const ContactDetail = lazy(() =>
   import("./components/contact-redux/ContactDetail")
@@ -120,12 +119,12 @@ function App() {
             <ListItemText>Home</ListItemText>
           </ListItem>
         </Link>
-        <Link to="/todo" className={classes.link}>
+        <Link to="/covid" className={classes.link}>
           <ListItem button>
             <ListItemIcon>
               <PlaylistAddCheck />
             </ListItemIcon>
-            <ListItemText>To-Do</ListItemText>
+            <ListItemText>CovidRisk</ListItemText>
           </ListItem>
         </Link>
         <Link to="/contacts" className={classes.link}>
@@ -194,8 +193,7 @@ function App() {
               <Suspense fallback={<div>Loading...</div>}>
                 <Switch>
                   <Route path="/" component={Home} exact></Route>
-                  <Route path="/todo" component={Todo} exact></Route>
-                  <Route path="/todo/:id" component={TodoDetail}></Route>
+                  <Route path="/covid" component={CovidRisk} exact></Route>
                   <Route path="/contacts" component={Contact} exact></Route>
                   <Route path="/contacts/:id" component={ContactDetail}></Route>
                 </Switch>
