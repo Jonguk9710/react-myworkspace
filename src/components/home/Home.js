@@ -9,7 +9,6 @@ import BarChartSample from "./BarChartSample";
 import LineChartSample from "./LineChartSample";
 import { useEffect, useState } from "react";
 import api from "../../api/opendata";
-import Covid from "../covid19/Covid";
 
 const useStyles = makeStyles((theme) => ({
   // 내부 페이퍼에 스타일을 지정
@@ -71,17 +70,13 @@ const Home = () => {
       <Hidden mdDown>
         <Grid item lg={1} />
       </Hidden>
-      <Grid item xs={12} sm={7} lg={6}>
-        <Paper className={classes.paper}>
-          <h3>지역별 코로나19 위험도</h3>
-          <Covid />
-        </Paper>
-      </Grid>
-      <Grid item xs={12} sm={5} lg={4}>
+      <Grid item xs={12} sm={5} lg={6}>
         <Paper className={classes.paper} style={{ height: "30vh" }}>
           <h3>시도별 코로나19 현황</h3>
           <BarChartSample data={sourceData} />
         </Paper>
+      </Grid>
+      <Grid item xs={12} sm={5} lg={4}>
         <Paper className={classes.paper} style={{ height: "30vh" }}>
           <h3>
             <Select

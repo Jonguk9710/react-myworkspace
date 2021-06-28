@@ -9,6 +9,7 @@ import BarChartSample from "./BarChartSample";
 import { useEffect, useState } from "react";
 import api from "../../api/opendata";
 import Covid from "../covid19/Covid";
+import covidApi from "../../api/covid";
 
 const useStyles = makeStyles((theme) => ({
   // 내부 페이퍼에 스타일을 지정
@@ -26,19 +27,52 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const transformLocationData = (source, sido, covidData) => {
+  if (source.length === 0) return [];
+
+  covidData.filter((item) => {
+    if (item.name === sido) {
+      return (sido = item.location);
+    }
+    return sido;
+  });
+
+  console.log(sido);
+
+  const transData = [];
+  let item = {};
+  source.map((covid) => {
+    if (covid.gubun === sido) {
+      item.stdDay = covid.stdDay.substr(7, 6);
+      item.incDec = parseInt(covid.incDec);
+      transData.unshift(item);
+      item = {};
+    }
+    return transData;
+  });
+  return transData;
+};
+
 const CovidRisk = () => {
   const classes = useStyles();
   const [sido, setSido] = useState("");
   const [source, setSource] = useState([]);
+  const [covidData, setCovidData] = useState([]);
 
-  const sourceData = source.slice(0, 19);
-
-  const gubun = sourceData.map((a) => a.gubun);
+  const gubun = covidData.map((a) => a.name);
 
   useEffect(() => {
     const getData = async () => {
       const result = await api.fetchCovidDaily();
       setSource(result.data);
+    };
+    getData();
+  }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      const result = await covidApi.fetch();
+      setCovidData(result.data);
     };
     getData();
   }, []);
@@ -60,7 +94,7 @@ const CovidRisk = () => {
         </Paper>
       </Grid>
       <Grid item xs={12} sm={5} lg={4}>
-        <Paper className={classes.paper} style={{ height: "50vh" }}>
+        <Paper className={classes.paper} style={{ height: "63vh" }}>
           <h3>
             <Select
               value={sido}
@@ -76,7 +110,9 @@ const CovidRisk = () => {
             </Select>
             {"\u00A0"} 코로나19 현황
           </h3>
-          <BarChartSample data={sourceData} />
+          <BarChartSample
+            data={transformLocationData(source, sido, covidData)}
+          />
         </Paper>
       </Grid>
     </Grid>
