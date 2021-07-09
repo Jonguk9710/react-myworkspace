@@ -43,6 +43,7 @@ const transformLocationData = (source, sido) => {
   });
   return transData;
 };
+
 const Home = () => {
   const classes = useStyles();
   const [sido, setSido] = useState("");
@@ -71,13 +72,13 @@ const Home = () => {
         <Grid item lg={1} />
       </Hidden>
       <Grid item xs={12} sm={5} lg={6}>
-        <Paper className={classes.paper} style={{ height: "30vh" }}>
+        <Paper className={classes.paper} style={{ height: "60vh" }}>
           <h3>시도별 코로나19 현황</h3>
           <BarChartSample data={sourceData} />
         </Paper>
       </Grid>
       <Grid item xs={12} sm={5} lg={4}>
-        <Paper className={classes.paper} style={{ height: "30vh" }}>
+        <Paper className={classes.paper} style={{ height: "60vh" }}>
           <h3>
             <Select
               value={sido}
